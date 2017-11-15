@@ -1,7 +1,5 @@
 package com.blog.samples.lambda.model;
 
-import java.util.Date;
-
 import lombok.Data;
 import lombok.ToString;
 
@@ -9,14 +7,16 @@ import lombok.ToString;
 @ToString
 public class ImageData {
 
+	private String bucket;
 	private String name;
 	private String contentType; 
     private String s3Uri;
     private Long sizeBytes;
-    private Date lastModified;
+    private String lastModified;
 	
-    public ImageData(String name, String contentType, String s3Uri, Long sizeBytes, Date lastModified) {
-		this.name = name;
+    public ImageData(String bucket, String name, String contentType, String s3Uri, Long sizeBytes, String lastModified) {
+		this.bucket = bucket;
+    	this.name = name;
     	this.contentType = contentType;
 		this.s3Uri = s3Uri;
 		this.sizeBytes = sizeBytes;

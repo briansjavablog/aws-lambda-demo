@@ -1,5 +1,9 @@
 package com.blog.samples.lambda;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 import com.amazonaws.regions.Regions;
@@ -93,10 +97,10 @@ public class LambdaFunctionHandler implements RequestHandler<S3Event, Void> {
         String contentType = s3Object.getObjectMetadata().getContentType();            
         String s3Uri = s3Object.getObjectContent().getHttpRequest().getURI().toString();
         Long sizeBytes = (Long)s3Object.getObjectMetadata().getRawMetadataValue("Content-Length");
-        Date lastModified = (Date)s3Object.getObjectMetadata().getRawMetadataValue("Last-Modified");
+        String lastModified = formatDate((Date)s3Object.getObjectMetadata().getRawMetadataValue("Last-Modified"));
         
         /* build up ImageData object to encapsulate data we want to save to dynamo */
-        ImageData imageData = new ImageData(name, contentType, s3Uri, sizeBytes, lastModified);
+        ImageData imageData = new ImageData(bucket, name, contentType, s3Uri, sizeBytes, lastModified);
         
         context.getLogger().log(imageData.toString());
         
@@ -143,4 +147,11 @@ public class LambdaFunctionHandler implements RequestHandler<S3Event, Void> {
     					.append(key)    					
     					.toString();  	
     }
+    
+    private String formatDate(Date date){
+    	
+    	LocalDateTime dateTIme = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();    	
+    	return dateTIme.format(DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss"));  	
+    }
+    
 }
