@@ -1,0 +1,12 @@
+<form id="uploadbanner">
+   <input type="file" id="file" 
+   (change)="fileEvent($event)">   
+   <button class="btn btn-primary" (click)="uploadfile(f)">
+   	Upload File
+     <i *ngIf="uploading"
+     class="fa fa-circle-o-notch fa-spin fa-fw" 
+     style="margin-left: 5px; font-size: 20px"></i>
+  </button>
+</form>
+
+<app-display-image-details></app-display-image-details>

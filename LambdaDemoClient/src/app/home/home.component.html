@@ -1,0 +1,84 @@
+
+<div class="row">
+	<div class="col-2">		
+	</div>
+	<div class="col-8">
+		<div class="jumbotron">
+			<h1 class="display-4">AWS S3 and Lambda Demo</h1>
+			<p class="lead">This demo app allows you to upload image files to an S3 bucket and then view the details of those images. When a file is uploaded to the specified bucket, an AWS lambda function is triggered. It retrieves the uploaded image from S3 and saves the image meta data to DynamoDB. When a file is deleted from the bucket, the same lambda fucntion is called, but this time it deletes the associated image meta data from DynamoDB. 
+			As well as allowing you to upload and delete images, this Angular client periodically calls a lambda function (via API Gateway) to retrieve all image details from DynamoDB.
+			</p>
+
+			<div class="container">
+				<form [formGroup]="awsDetailsForm" (ngSubmit)="onSubmit()">
+					<div class="form-group row">	
+						<label for="access-key-id-input" 
+						class="col-3 col-form-label">Access Key Id</label>
+						<div class="col-8">
+							<input class="form-control" 
+							type="text" 
+							placeholder="Access Key Id"       
+							id="access-key-id-input"
+							formControlName="accessKeyId">
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="secret-access-key-input" 
+						class="col-3 col-form-label">Secret Access Key</label>
+						<div class="col-8">
+							<input class="form-control" 
+							type="password" 
+							placeholder="Secret Access Key" 
+							id="secret-access-key-input"
+							formControlName="secretAccessKeyId">
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="api-gateway-url-input" 
+						class="col-3 col-form-label">API Gatewway URL</label>
+						<div class="col-8">
+							<input class="form-control" 
+							type="input" 
+							placeholder="API Gateway URL" 
+							id="api-gateway-url-input"
+							formControlName="apiGatewayUrl">
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="s3-bucket-name-input" 
+						class="col-3 col-form-label">S3 Bucket Name</label>
+						<div class="col-8">
+							<input class="form-control" 
+							type="input" 
+							placeholder="S3 Bucket Name" 
+							id="s3-bucket-name-input"
+							formControlName="s3BucketName">
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="aws-region-input" 
+						class="col-3 col-form-label">AWS Region</label>
+						<div class="col-8">
+							<input class="form-control" 
+							type="input" 
+							placeholder="AWS Region" 
+							id="aws-region-input"
+							formControlName="awsRegion">
+						</div>
+					</div>		
+
+					<div class="form-group row">
+						<div class="offset-sm-9 col-sm-2">
+							<button type="submit" 
+							class="btn btn-primary"
+							[disabled]="!awsDetailsForm.valid">
+							Get Started!					  		  
+						</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+	<div class="col-2">					
+	</div>
+</div>

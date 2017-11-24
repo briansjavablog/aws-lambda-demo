@@ -1,0 +1,50 @@
+
+<div class="row" style="padding-top: 40px">
+	<div class="col-12">
+		<h2>Image Details</h2>
+		<hr>
+	</div>
+</div>
+<div class="row">
+	<div class="col-12">
+		<p>The table below displays details of the images that have been uploaded to S3 bucket <b>{{ awsService.getS3BucketName() }}</b>. This app polls an API Gateway endpoint every 3 seconds, which in turn invokes a Lambda function to retrieve all image details from Dynamo DB.</p>
+	</div>
+</div>
+<div style="padding-top: 20px">
+	<table class="table table-bordered">
+	  <thead>
+	    <tr>  	      
+	      <th>Name</th>
+	      <th>Content Type</th>
+	      <th>S3 URL</th>
+	      <th>Size</th>
+	      <th>Last Modified</th>
+	      <th>Image</th>
+	      <th>Delete</th>
+	    </tr>
+	  </thead>
+	  <tbody>  	
+	 	<tr *ngFor="let imageDetail of imageDetails">	            
+	      <td>{{ imageDetail.name }}</td>
+	      <td>{{ imageDetail.contentType }}</td>
+	      <td>{{ imageDetail.s3Uri }}</td>
+	      <td>{{ imageDetail.sizeBytes | convertToKb }}</td>
+	      <td>{{ imageDetail.lastModified }}</td>
+	      <td>
+	      	<img src="{{ imageDetail.s3Uri }}" style="height:60px; width:60px">
+	      </td>	     
+	      <td (click)="deleteImage(imageDetail)">
+	      	<i *ngIf="deletingImageName !== imageDetail.name"
+	      	   class="fa fa-times" aria-hidden="true" 
+               style="margin-left: 5px; font-size: 25px; cursor: pointer;"></i>
+			<i *ngIf="deletingImageName === imageDetail.name"
+			   class="fa fa-circle-o-notch fa-spin fa-fw" 
+			   style="margin-left: 5px; font-size: 25px"></i>
+           </td>
+	    </tr>    
+	  </tbody>
+	</table>
+	<i *ngIf="!imageDetails"
+		   class="fa fa-circle-o-notch fa-spin fa-fw" 
+		   style="font-size: 25px; margin-left: 5px"></i>	
+</div>
