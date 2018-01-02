@@ -1,4 +1,4 @@
-package com.blo.samples.lambda.demo;
+package com.blog.samples.lambda.demo;
 
 import java.io.IOException;
 import java.io.InputStream;

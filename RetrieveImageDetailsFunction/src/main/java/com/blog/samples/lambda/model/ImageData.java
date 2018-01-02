@@ -1,10 +1,5 @@
 package com.blog.samples.lambda.model;
 
-import java.time.LocalDate;
-
-import com.blog.samples.lambda.LocalDateSerializer;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-
 import lombok.ToString;
 
 @ToString

@@ -1,6 +1,5 @@
 package com.blog.samples.lambda;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
@@ -35,11 +34,10 @@ import com.blog.samples.lambda.model.ImageData;
  * the event
  * 
  * @author brianh
- *
  */
 public class LambdaFunctionHandler implements RequestHandler<S3Event, Void> {
 	
-    private String DYNAMODB_TABLE_NAME = "Image";
+    private String DYNAMODB_TABLE_NAME = "ImageDetails";
     private Regions REGION = Regions.US_WEST_2;
     
     private AmazonS3 s3Client = AmazonS3ClientBuilder.standard()
@@ -114,7 +112,7 @@ public class LambdaFunctionHandler implements RequestHandler<S3Event, Void> {
         putItemRequest.addItemEntry("size", new AttributeValue(String.valueOf(imageData.getSizeBytes())));
         putItemRequest.addItemEntry("lastModified", new AttributeValue(String.valueOf(imageData.getLastModified())));
         
-        /* save data to Dynamo */
+        /* save data to DynamoDB */
         PutItemResult putItemResult = dynamoDbClient.putItem(putItemRequest);
         
         context.getLogger().log(putItemResult.toString());
@@ -129,7 +127,7 @@ public class LambdaFunctionHandler implements RequestHandler<S3Event, Void> {
 		deleteItemRequest.setTableName(DYNAMODB_TABLE_NAME);
 		deleteItemRequest.addKeyEntry("s3Url", new AttributeValue(s3Url));
 		
-    	/* delete from Dynamo */
+    	/* delete from DynamoDB */
     	DeleteItemResult deleteItemResult = dynamoDbClient.deleteItem(deleteItemRequest);
     	
     	context.getLogger().log(deleteItemResult.toString());
@@ -150,8 +148,8 @@ public class LambdaFunctionHandler implements RequestHandler<S3Event, Void> {
     
     private String formatDate(Date date){
     	
-    	LocalDateTime dateTIme = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();    	
-    	return dateTIme.format(DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss"));  	
+    	LocalDateTime dateTime = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();    	
+    	return dateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss"));  	
     }
     
 }

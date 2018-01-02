@@ -20,7 +20,7 @@
                     "ownerIdentity": {
                         "principalId": "A3O43ACG0J5BE6"
                     },
-                    "arn": "arn:aws:s3:::s3-demo-bucket-bh"
+                    "arn": "arn:aws:s3:::s3-demo-bucket"
                 },
                 "object": {
                     "key": "brian_hannaway.png",
@@ -31,9 +31,6 @@
                     "urlDecodedKey": "brian_hannaway.png"
                 },
                 "s3SchemaVersion": "1.0"
-            },
-            "userIdentity": {
-                "principalId": "A3O43ACG0J5BE6"
             }
         }
     ]

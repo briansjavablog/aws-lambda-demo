@@ -1,4 +1,4 @@
-package com.blo.samples.lambda.demo;
+package com.blog.samples.lambda.demo;
 
 import com.amazonaws.services.lambda.runtime.ClientContext;
 import com.amazonaws.services.lambda.runtime.CognitoIdentity;
