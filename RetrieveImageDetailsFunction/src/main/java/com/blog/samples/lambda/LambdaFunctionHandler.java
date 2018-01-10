@@ -16,8 +16,8 @@ import com.blog.samples.lambda.model.ImageData;
 
 public class LambdaFunctionHandler implements RequestHandler<Object, List<ImageData>> {
 
-	private String DYNAMODB_TABLE_NAME = "Image";
-    private Regions REGION = Regions.US_WEST_2;    
+	private String DYNAMODB_TABLE_NAME = "ImageDetails";
+    private Regions REGION = Regions.EU_WEST_1;    
     private AmazonDynamoDB dynamoDbClient = AmazonDynamoDBClientBuilder.standard()
 											   	   					   .withRegion(REGION)
 											   	   					   .build();

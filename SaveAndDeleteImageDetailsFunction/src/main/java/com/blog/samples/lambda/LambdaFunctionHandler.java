@@ -38,7 +38,7 @@ import com.blog.samples.lambda.model.ImageData;
 public class LambdaFunctionHandler implements RequestHandler<S3Event, Void> {
 	
     private String DYNAMODB_TABLE_NAME = "ImageDetails";
-    private Regions REGION = Regions.US_WEST_2;
+    private Regions REGION = Regions.EU_WEST_1;
     
     private AmazonS3 s3Client = AmazonS3ClientBuilder.standard()
 											   		 .withRegion(REGION)
